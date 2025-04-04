@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const { schema, connect } = mongoose;
+const { Schema, connect } = mongoose;
 
 const connectDB = () => {
   return connect(process.env.DB_CONNECTION_ACCESS);
