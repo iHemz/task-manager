@@ -1,9 +1,16 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const tasks = require("./routes/tasks");
 const connectDB = require("./db/connect");
 const port = 3000;
 
+const corsOption = {
+  origin: "https://tasker-coral-eight.vercel.app",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOption));
 app.use(express.static("./public"));
 app.use(express.json());
 
