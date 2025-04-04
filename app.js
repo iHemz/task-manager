@@ -3,18 +3,22 @@ const cors = require("cors");
 const app = express();
 const tasks = require("./routes/tasks");
 const connectDB = require("./db/connect");
-const port = 3000;
+const notFound = require("./middleware/not-found");
+const errorHandlerMiddleWare = require("./middleware/error-handler");
+const port = process.env.PORT || 3000;
 
 const corsOption = {
   origin: "https://tasker-coral-eight.vercel.app",
   optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOption));
 app.use(express.static("./public"));
 app.use(express.json());
 
 app.use("/api/v1/tasks", tasks);
+app.use(notFound);
+app.use(errorHandlerMiddleWare);
+app.use(cors(corsOption));
 
 const start = async () => {
   try {
